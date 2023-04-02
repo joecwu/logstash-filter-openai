@@ -5,7 +5,7 @@ The OpenAI Filter Logstash Plugin is a Java-based filter plugin for Logstash, wh
 ## Key Features
 1. Configurable settings:
   - OpenAI API key
-  - Prompt template with support for variables enclosed in {{ }}, which are replaced with actual data from the event
+  - Prompt template with support for variables enclosed in `{{ }}`, which are replaced with actual data from the event
   - Default values for variables
   - Source field from which the data is taken
   - Target field to store the processed result
