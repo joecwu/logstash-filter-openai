@@ -13,10 +13,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class JavaFilterExampleTest {
+public class OpenAITest {
 
     @Test
-    public void testJavaExampleFilter() {
+    public void testOpenAIFilter() {
         String sourceField = "foo";
         Configuration config = new ConfigurationImpl(Collections.singletonMap("source", sourceField));
         Context context = new ContextImpl(null);
