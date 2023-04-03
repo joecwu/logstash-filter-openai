@@ -12,10 +12,12 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.*;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 @LogstashPlugin(name = "openai")
 public class OpenAIFilter implements Filter {
@@ -117,9 +119,14 @@ public class OpenAIFilter implements Filter {
 
             // Parse response
             String responseBody = response.body().string();
-            Map<String, Object> responseMap = gson.fromJson(responseBody, Map.class);
-            Map<String, Object> choices = (Map<String, Object>) ((List) responseMap.get("choices")).get(0);
+
+            Map<String, Object> responseMap = gson.fromJson(responseBody, new TypeToken<Map<String, Object>>() {}.getType());
+            List<Map<String, Object>> choicesList = (List<Map<String, Object>>) responseMap.get("choices");
+            Map<String, Object> choices = choicesList.get(0);
             responseText = (String) choices.get("text");
+            // Map<String, Object> responseMap = gson.fromJson(responseBody, Map.class);
+            // Map<String, Object> choices = (Map<String, Object>) ((List) responseMap.get("choices")).get(0);
+            // responseText = (String) choices.get("text");
         } catch (IOException e) {
             // Handle exceptions and implement retry mechanism if needed
             e.printStackTrace();
